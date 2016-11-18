@@ -33,3 +33,33 @@ for addTrack in e1m1:
     newTracks.append(newTrack)
     newTrack = []
 
+exampleNote = note.Note("F5")
+exampleRest = note.Rest()
+
+iterator = 0
+newDict = {}
+for track in newTracks:
+   for note in track:
+      noteArr = []
+      for nextNote in track:
+          if type(note) == type(exampleNote) and iterator < len(track) - 1:
+             noteArr.append(track[iterator + 1])
+          iterator += 1
+      iterator = 0
+      newDict[note] = noteArr
+      noteArr = []
+   print noteArr
+
+
+print newDict
+#for f in newTracks:
+#   for g in f:
+#      newDict[g] = []
+#   noteArr = []
+#   for n in newDict:
+#      for o in f:
+#         if n == o and iterator < len(f):
+#            noteArr.append(o)
+#   newDict[n] = noteArr
+
+#print(newDict)
