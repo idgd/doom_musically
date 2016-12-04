@@ -19,39 +19,52 @@ class Track:
 class MarkovNoteChain:
    noteDict = {}
 
+exampleNote = note.Note("E2")
+exampleRest = note.Rest()
+
 newTracks = []
 
 e1m1 = converter.parse("mid/d_e1m1.mid")
-for addTrack in e1m1:
-    newTrack = []
-    for addNote in addTrack:
-        if type(addNote) == note.Note:
-           newTrack.append(note.Note(addNote.pitch))
-        if type(addNote) == note.Rest:
-           newTrack.append(addNote)
 
-    newTracks.append(newTrack)
-    newTrack = []
-
-exampleNote = note.Note("F5")
-exampleRest = note.Rest()
+for track in e1m1:
+    
+    newNotes = []
+    
+    for note in track:
+        newNotes.append(note)
+    
+    newTracks.append(newNotes)
+    newNotes = []
 
 iterator = 0
-newDict = {}
+songTracks = []
 for track in newTracks:
-   for note in track:
-      noteArr = []
-      for nextNote in track:
-          if type(note) == type(exampleNote) and iterator < len(track) - 1:
-             noteArr.append(track[iterator + 1])
-          iterator += 1
-      iterator = 0
-      newDict[note] = noteArr
-      noteArr = []
-   print noteArr
+    foo = Track("T%s" % iterator, track)
+    songTracks.append(foo)
+    iterator += 1
 
+print e1m1.tempo
 
-print newDict
+#for track in newTracks:
+#   for note in track:
+#      noteArr = []
+#      for nextNote in track:
+#          if type(note) == type(exampleNote):
+#             print "1"
+#             print note.pitch
+#             print exampleNote.pitch
+#             if note.pitch == exampleNote.pitch:
+#                print "2"
+#                if iterator < len(track) - 1:
+#                   print "3"
+#          iterator += 1
+#      iterator = 0
+#      if type(note) == type(exampleNote):
+#         newDict[note.midi] = noteArr
+#      elif type(note) == type(exampleRest):
+#         newDict[note] = noteArr
+#      noteArr = []
+
 #for f in newTracks:
 #   for g in f:
 #      newDict[g] = []
