@@ -56,9 +56,10 @@ for track in newSong.tracks:
 for mark in markovChain.noteDict:
     for track in newSong.tracks:
         for index,note in enumerate(track.notes):
-            if type(note) == type(exampleNote) and note.pitch.midi == mark:
-                print "ok!"
-    markovChain.noteDict[mark].append(0)
+            if type(note) == type(exampleNote) and note.pitch.midi == mark and index < len(track.notes) - 1:
+                markovChain.noteDict[mark].append(track.notes[index + 1])
+            if type(note) == type(exampleRest) and note.fullName == mark and index < len(track.notes) - 1:
+                markovChain.noteDict[mark].append(track.notes[index + 1])
 
 print markovChain.noteDict
 
