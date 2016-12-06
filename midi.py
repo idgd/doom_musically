@@ -43,7 +43,24 @@ for track in newTracks:
     songTracks.append(foo)
     iterator += 1
 
-print e1m1.tempo
+newSong = Song("e1m1",90,songTracks)
+markovChain = MarkovNoteChain()
+
+for track in newSong.tracks:
+    for index,note in enumerate(track.notes):
+        if type(note) == type(exampleNote):
+            markovChain.noteDict[note.pitch.midi] = []
+        if type(note) == type(exampleRest):
+            markovChain.noteDict[note.fullName] = []
+
+for mark in markovChain.noteDict:
+    for track in newSong.tracks:
+        for index,note in enumerate(track.notes):
+            if type(note) == type(exampleNote) and note.pitch.midi == mark:
+                print "ok!"
+    markovChain.noteDict[mark].append(0)
+
+print markovChain.noteDict
 
 #for track in newTracks:
 #   for note in track:
