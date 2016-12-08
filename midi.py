@@ -1,3 +1,4 @@
+import random
 from music21 import *
 
 class Song:
@@ -60,3 +61,11 @@ for mark in markovChain.noteDict:
 				markovChain.noteDict[mark].append(track.notes[index + 1])
 			if type(note) == type(exampleRest) and note.fullName == mark and index < len(track.notes) - 1:
 				markovChain.noteDict[mark].append(track.notes[index + 1])
+
+def nextNote(note):
+	if type(note) == type(exampleNote):
+		print random.choice(markovChain.noteDict[note.pitch.midi])
+	if type(note) == type(exampleRest):
+		print random.choice(markovChain.noteDict[note.fullName])
+
+nextNote(exampleNote)
