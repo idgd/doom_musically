@@ -62,10 +62,14 @@ for mark in markovChain.noteDict:
 			if type(note) == type(exampleRest) and note.fullName == mark and index < len(track.notes) - 1:
 				markovChain.noteDict[mark].append(track.notes[index + 1])
 
-def nextNote(note):
-	if type(note) == type(exampleNote):
-		print random.choice(markovChain.noteDict[note.pitch.midi])
-	if type(note) == type(exampleRest):
-		print random.choice(markovChain.noteDict[note.fullName])
+def nextNote(note, n):
+	while n > 0:
+		print n
+		if type(note) == type(exampleNote):
+			nextnote = random.choice(markovChain.noteDict[note.pitch.midi])
+		if type(note) == type(exampleRest):
+			nextnote = random.choice(markovChain.noteDict[note.fullName])
+		return nextNote(nextnote, n - 1)
+		print nextnote
 
-nextNote(exampleNote)
+nextNote(exampleNote,10)
