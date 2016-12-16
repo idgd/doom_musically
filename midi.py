@@ -1,4 +1,5 @@
 import random
+import copy
 from music21 import *
 
 class Song:
@@ -28,6 +29,7 @@ newTracks = []
 e1m1 = converter.parse("mid/d_e1m1.mid")
 
 for track in e1m1:
+	print track
 	newNotes = []
 
 	for note in track:
@@ -62,14 +64,19 @@ for mark in markovChain.noteDict:
 			if type(note) == type(exampleRest) and note.fullName == mark and index < len(track.notes) - 1:
 				markovChain.noteDict[mark].append(track.notes[index + 1])
 
+#stream = midi.realtime.StreamPlayer(e1m1)
+#stream.play()
+
+newStream = stream.Stream()
+
 def nextNote(note, n):
 	while n > 0:
-		print n
 		if type(note) == type(exampleNote):
-			nextnote = random.choice(markovChain.noteDict[note.pitch.midi])
+			nextnote = copy.copy(random.choice(markovChain.noteDict[note.pitch.midi]))
 		if type(note) == type(exampleRest):
-			nextnote = random.choice(markovChain.noteDict[note.fullName])
+			nextnote = copy.copy(random.choice(markovChain.noteDict[note.fullName]))
+		newStream.append(nextnote)
 		return nextNote(nextnote, n - 1)
-		print nextnote
 
-nextNote(exampleNote,10)
+nextNote(exampleNote,500)
+newStream.show('midi')
