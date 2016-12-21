@@ -1,6 +1,5 @@
 \documentclass[11pt]{article}
 
-\usepackage{utopia}
 \usepackage{setspace}
 \usepackage[margin=8em]{geometry}
 \usepackage[activate={true,nocompatibility},
@@ -11,7 +10,9 @@
 			factor=1100,
 			stretch=10,
 			shrink=10]{microtype}
-\usepackage{lipsum}
+\usepackage{datetime}
+
+\yyyymmdddate
 
 \doublespacing
 
@@ -19,5 +20,35 @@
 \setlength\parindent{1em}
 
 \begin{document}
-\lipsum
+
+\begin{center}
+
+{\LARGE \textsc{CAPSTONE PROJECT}}
+
+Isaac Dudney
+
+\today
+\end{center}
+
+\newpage
+
+\noindent
+{\large \textsc{Section 1: Project Overview}}
+
+In this project, I am going to be generating an arbitrarily long midi stream (song) based on midi input. It will use a Markov Chain to build a model for generating the output data. The area of expertise needed for this project is a rudimentary understanding of music theory, and knowledge of machine learning algorithms and their possible applications to music. The project originated from a desire to have practically infinite music generated from arbitrary input. Some possible datasets to input into the Markov Chain is midi transcriptions of classical, public domain music, arbitrary input from the user, or royalty free midi files.
+
+For context, midi is a protocol for transmitting musical data (such as pitch, duration, etc). It is very simple, and allows a computer to interpret notes very quickly. If a machine learning algorithm, like a Markov Chain, is handed this input, it can generate non-human output very easily.
+
+\noindent
+{\large \textsc{Section 2: Problem Statement}}
+
+Music for background listening is limited, and human generated. It's very expensive to do this (in man-hours), and if someone wants more of the same type of music in one type of song, and the artist hasn't made any more, they have to wait for them to make more (if it ever comes about). So, we should allow computers to create derivatives of songs, so that arbitrarily long musical pieces can be created of the same type as the input song.
+
+So the process to solve this finite music problem will be relatively simple. Take input from a midi file or stream, build a machine learning model which will predict a new note based on a previous note, and another note based on that one, for as long as the user desires. This program would generate a song, which is very similar to the original in genre and feeling.
+
+\noindent
+{\large \textsc{Section 3: Metrics}}
+
+To measure the success of an artistic generator is a tricky thing, since the only real metric an end user should care about is if it `sounds good.' However, since that isn't a measurable metric, we'll use similarity in 
+
 \end{document}
